@@ -54,7 +54,7 @@ if user_menu == 'Medal Tally':
         st.title("Medal Tally in " + str(selected_year) + " Olympics")
 
     if selected_year == 'Overall' and selected_country != 'Overall':
-        st.title(selected_country + "Overall Performance")
+        st.title(selected_country + " Overall Performance")
 
     if selected_year != 'Overall' and selected_country != 'Overall':
         st.title(selected_country + " performance in " + str(selected_year) + " Olympics")
