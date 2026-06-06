@@ -57,7 +57,7 @@ if user_menu == 'Medal Tally':
         st.title(selected_country + "Overall Performance")
 
     if selected_year != 'Overall' and selected_country != 'Overall':
-        st.title(selected_country + " performance in " + str(selected_year) + "Olympics")
+        st.title(selected_country + " performance in " + str(selected_year) + " Olympics")
 
     st.dataframe(medal_tally)
 
@@ -107,9 +107,17 @@ if user_menu == 'Overall Analysis':
     fig = px.line(events_over_time, x="Edition", y="Event")
     st.plotly_chart(fig)
 
-    st.title("Athletes Over the Years")
+    st.title("Growth of Olympic Athlete Participation")
     athletes_over_time = helper.data_over_time(df,'Name')
-    fig = px.line(athletes_over_time, x="Edition", y="Name")
+    fig = px.line(
+        athletes_over_time,
+        x='Edition',   # or 'Year'
+        y='Name'
+    )
+    fig.update_layout(
+        xaxis_title='Olympic Year',
+        yaxis_title='Number of Athletes'
+    )
     st.plotly_chart(fig)
 
     st.title("No. of Events over time (Every Sports)")
@@ -145,9 +153,15 @@ if user_menu == 'Country-wise Analysis':
 
     st.title(selected_country + " excels in the following sports")
     pt = helper.country_event_heatmap(df, selected_country)
-    fig, ax = plt.subplots(figsize = (20, 20))
-    ax = sns.heatmap(pt, annot = True  )
-    st.pyplot(fig)
+    pt = pt.fillna(0)
+    if pt.empty or pt.shape[0] == 0 or pt.shape[1] == 0:
+        st.warning("No data available.")
+    else:
+        fig, ax = plt.subplots(figsize=(20,20))
+        sns.heatmap(pt, annot=True, fmt=".0f", ax=ax)
+        st.pyplot(fig)
+
+
 
     st.title("Top 10 athletes")
     top10_df = helper.most_successful_athlete(df, selected_country)
