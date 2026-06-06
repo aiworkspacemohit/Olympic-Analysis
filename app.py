@@ -19,14 +19,15 @@ df = preprocessor.preprocess(df, region_df)
 # st.sidebar.title("Olympics Analysis")
 # st.sidebar.title("🏅 Olympic Insights Hub")
 st.sidebar.markdown("""
-<h2 style='text-align:left;
-           color:#3E362E;
-           font-family:Arial, sans-serif;
-           font-weight:900;
-           letter-spacing:1px;'>
-🥇 OLYMPIC ANALYSIS
+<h2 style="
+    color: inherit;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1.0;
+">
+OLYMPIC<br>ANALYSIS
 </h2>
-<hr style='margin-top:-10px;'>
+<hr>
 """, unsafe_allow_html=True)
 
 st.sidebar.image('flag-Olympic-Games.png')
